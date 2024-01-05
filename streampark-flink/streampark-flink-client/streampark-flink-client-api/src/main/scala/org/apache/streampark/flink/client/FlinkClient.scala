@@ -24,9 +24,9 @@ import org.apache.streampark.flink.proxy.FlinkShimsProxy
 
 import scala.language.{implicitConversions, reflectiveCalls}
 import scala.reflect.ClassTag
-
+//todo 操作flink任务的入口
 object FlinkClient extends Logger {
-
+  //todo flinkclient
   private[this] val FLINK_CLIENT_HANDLER_CLASS_NAME =
     "org.apache.streampark.flink.client.FlinkClientHandler"
 
@@ -44,7 +44,7 @@ object FlinkClient extends Logger {
 
   private[this] val SAVEPOINT_REQUEST =
     "org.apache.streampark.flink.client.bean.TriggerSavepointRequest" -> "triggerSavepoint"
-
+   //todo 提交flink任务
   def submit(submitRequest: SubmitRequest): SubmitResponse = {
     proxy[SubmitResponse](submitRequest, submitRequest.flinkVersion, SUBMIT_REQUEST)
   }
@@ -73,6 +73,7 @@ object FlinkClient extends Logger {
     FlinkShimsProxy.proxy(
       flinkVersion,
       (classLoader: ClassLoader) => {
+        //todo 通过反射提交任务
         val submitClass = classLoader.loadClass(FLINK_CLIENT_HANDLER_CLASS_NAME)
         val requestClass = classLoader.loadClass(requestBody._1)
         val method = submitClass.getDeclaredMethod(requestBody._2, requestClass)

@@ -22,7 +22,7 @@ import org.apache.streampark.common.enums.ExecutionMode._
 import org.apache.streampark.flink.client.`trait`.FlinkClientTrait
 import org.apache.streampark.flink.client.bean._
 import org.apache.streampark.flink.client.impl._
-
+//todo flink任务的操作类
 object FlinkClientHandler {
 
   private[this] val clients: Map[ExecutionMode, FlinkClientTrait] = Map(
@@ -34,7 +34,7 @@ object FlinkClientHandler {
     KUBERNETES_NATIVE_SESSION -> KubernetesNativeSessionClient,
     KUBERNETES_NATIVE_APPLICATION -> KubernetesNativeApplicationClient
   )
-
+  //todo 提交flink任务
   def submit(request: SubmitRequest): SubmitResponse = {
     clients.get(request.executionMode) match {
       case Some(client) => client.submit(request)
